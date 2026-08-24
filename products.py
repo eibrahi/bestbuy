@@ -47,7 +47,7 @@ class Product:
         if not self.active:
             raise ValueError("Product is not active")
 
-        self.quantity += quantity
+        self.quantity -= quantity
         return quantity * self.price
 
 
