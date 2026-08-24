@@ -1,6 +1,7 @@
 from products import Product
 from store import Store
 
+# Setup initial stock of inventory
 product_list = \
     [
     Product("MacBook Air M2", price=1450, quantity=100),
@@ -8,9 +9,11 @@ product_list = \
     Product("Google Pixel 7", price=500, quantity=250),
     ]
 
+# Create store with initial products
 best_buy = Store(product_list)
 
 def start(store:Store):
+    """Start the store command-line interface."""
     while True:
         print(
             '''
@@ -24,20 +27,23 @@ def start(store:Store):
 
         choice = input("Please choose a number: ")
         if choice == "1":
+            # Display all active products
             print("______")
             for i, product in enumerate(store.get_all_products(), start=1):
                 print(f"{i}. {product.name}, Price: {product.price}, Quantity: {product.quantity}")
             print("______")
 
-        if choice == "2":
+        elif choice == "2":
+            # Display total inventory quantity
             print(f"Total of {store.get_total_quantity()} items in store")
 
-        if choice == "3":
+        elif choice == "3":
+            # Create a new shopping list
             products_list = store.get_all_products()
             shopping_list = []
 
             print("______")
-            for i, product in enumerate(store.get_all_products(), start=1):
+            for i, product in enumerate(products_list, start=1):
                 print(f"{i}. {product.name}, Price: {product.price}, Quantity: {product.quantity}")
             print("______")
             print("When you want to finish order, enter empty text.")
@@ -51,6 +57,7 @@ def start(store:Store):
 
                 selected_product = products_list[int(product_number) - 1]
 
+                # Add selected product and quantity to the order
                 shopping_list.append((selected_product, amount))
 
                 print("Product added to list!")
@@ -61,8 +68,8 @@ def start(store:Store):
             print(f"Order mode! Total pyment: ${total_price}")
 
 
-        if choice == "4":
+        elif choice == "4":
             break
 
-
+"""Start the store command-line interface."""
 start(best_buy)
